@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\TaskController;
-use App\Http\Controllers\ProjectController;
-use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\ProjectController;
+use App\Http\Controllers\Api\CategoryController;
 
 Route::apiResource('projects', ProjectController::class);
 
