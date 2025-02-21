@@ -12,19 +12,22 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index(): JsonResource  
+    public function index(): JsonResource
     {
-        return CategoryResource::collection(Category::all());
+        $categories = Category::paginate(10);
+        
+        return CategoryResource::collection($categories);
     }
 
     public function store(CategoryRequest $request): JsonResponse
     {
-        Category::create($request->validated());
-
-        return response()->json('category created', 201);
+        try {
+            $category = Category::create($request->validated());
+            
+            return response()->json(new CategoryResource($category), 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create category'], 500);
+        }
     }
 
     /**
