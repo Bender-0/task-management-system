@@ -7,24 +7,29 @@ use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProjectRequest;
+use App\Http\Resources\ProjectResource;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProjectController extends Controller
 {
-    public function index(Request $request): JsonResponse
+    public function index(Request $request): JsonResource
     {
         $projects = Project::when($request->due_date, function ($query, $date) {
             return $query->whereDate('due_date', $date);
-        })->get();
+        })->paginate(10);
 
-        return response()->json($projects);
+        return ProjectResource::collection($projects);
     }
 
-    // Create a new project
     public function store(ProjectRequest $request): JsonResponse
     {
-        Project::create($request->validated());
-
-        return response()->json('project created', 201);
+        try {
+            $project = Project::create($request->validated());
+            
+            return response()->json(new ProjectResource($project), 201);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create project'], 500);
+        }
     }
 
     /**
