@@ -42,8 +42,8 @@ Follow these steps to set up the project locally:
 
  ## Clone the repository
    ```bash
-   git clone https://github.com/Bender-0/task-managment-system.git
-   cd task-managment-system
+   git clone https://github.com/Bender-0/task-management-system.git
+   cd task-management-system
    ```
 
  ## Install dependencies
