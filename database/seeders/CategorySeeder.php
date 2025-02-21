@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Category;
 use Illuminate\Database\Seeder;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class CategorySeeder extends Seeder
 {
@@ -12,6 +13,8 @@ class CategorySeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Category::create(['name' => 'Urgent']);
+        Category::create(['name' => 'High Priority']);
+        Category::create(['name' => 'Low Priority']);
     }
 }
