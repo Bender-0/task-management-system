@@ -14,7 +14,7 @@ class ProjectController extends Controller
 {
     public function index(Request $request): JsonResource
     {
-        $projects = Project::when($request->due_date, function ($query, $date) {
+        $projects = Project::withCount('tasks')->when($request->due_date, function ($query, $date) {
             return $query->whereDate('due_date', $date);
         })->paginate(10);
 
