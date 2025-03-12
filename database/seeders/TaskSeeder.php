@@ -19,7 +19,7 @@ class TaskSeeder extends Seeder
             'title' => 'Design Homepage',
             'description' => 'Create a new design for the homepage',
             'status' => 'pending',
-            'due_date' => now()->addDays(10),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y')
         ]);
 
         Task::create([
@@ -28,7 +28,7 @@ class TaskSeeder extends Seeder
             'title' => 'Develop Contact Form',
             'description' => 'Implement a contact form on the website',
             'status' => 'pending',
-            'due_date' => now()->addDays(15),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
         ]);
 
         Task::create([
@@ -37,7 +37,20 @@ class TaskSeeder extends Seeder
             'title' => 'Create App Prototype',
             'description' => 'Design a prototype for the mobile app',
             'status' => 'completed',
-            'due_date' => now()->addDays(20),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
         ]);
+
+        for ($i = 0; $i < 5; $i++) {
+            Task::create([
+                'project_id' => rand(1, 3),
+                'category_id' => rand(1, 3),
+                'title' => 'Task ' . ($i + 1),
+                'description' => 'Description for task ' . ($i + 1),
+                'status' => ['pending', 'in progress', 'completed'][rand(0, 2)],
+                'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
+            ]);
+        }
+
+
     }
 }
