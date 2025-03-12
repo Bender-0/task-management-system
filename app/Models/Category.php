@@ -10,7 +10,7 @@ class Category extends Model
 {
     use HasFactory;
 
-    public function projects(): HasMany 
+    public function tasks(): HasMany 
     {
         return $this->hasMany(Task::class);
     }
