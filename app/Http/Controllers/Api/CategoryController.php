@@ -14,7 +14,7 @@ class CategoryController extends Controller
 {
     public function index(): JsonResource
     {
-        $categories = Category::paginate(10);
+        $categories = Category::withCount('tasks')->paginate(10);
         
         return CategoryResource::collection($categories);
     }
