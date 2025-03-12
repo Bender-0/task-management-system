@@ -14,7 +14,7 @@ class TaskController extends Controller
 {
     public function index(Request $request): JsonResource
     {
-        $tasks = Task::when($request->category_id, function ($query, $categoryId) {
+        $tasks = Task::with(['category', 'project'])->when($request->category_id, function ($query, $categoryId) {
             return $query->where('category_id', $categoryId);
         })->when($request->status, function ($query, $status) {
             return $query->where('status', $status);
