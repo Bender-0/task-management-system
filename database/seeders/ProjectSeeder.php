@@ -13,19 +13,19 @@ class ProjectSeeder extends Seeder
         Project::create([
             'name' => 'Website Redesign',
             'description' => 'Redesign the company website',
-            'due_date' => now()->addDays(30),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
         ]);
 
         Project::create([
             'name' => 'Mobile App Development',
             'description' => 'Develop a new mobile app',
-            'due_date' => now()->addDays(60),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
         ]);
 
         Project::create([
             'name' => 'Marketing Campaign',
             'description' => 'Launch a new marketing campaign',
-            'due_date' => now()->addDays(90),
+            'due_date' => today()->addDays(random_int(3,60))->format('d-m-Y'),
         ]);
     }
 }
